@@ -112,6 +112,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Stock API Configuration
+STOCK_API_KEY = config('STOCK_API_KEY', default='')
+STOCK_API_BASE_URL = config('STOCK_API_BASE_URL', default='https://api.twelvedata.com')
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
