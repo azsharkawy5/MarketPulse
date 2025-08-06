@@ -54,3 +54,14 @@ class UserLoginView(generics.GenericAPIView):
                 'access': str(refresh.access_token),
             }
         }, status=status.HTTP_200_OK)
+
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    """
+    View for user profile management.
+    """
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
