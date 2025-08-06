@@ -65,3 +65,24 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class UserLogoutView(generics.GenericAPIView):
+    """
+    View for user logout.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            refresh_token = request.data.get('refresh_token')
+            if refresh_token:
+                token = RefreshToken(refresh_token)
+                token.blacklist()
+            return Response({
+                'message': 'Logout successful'
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'message': 'Logout successful'
+            }, status=status.HTTP_200_OK)
