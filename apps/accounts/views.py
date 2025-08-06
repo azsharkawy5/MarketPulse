@@ -5,14 +5,12 @@ from .serializers import (
     UserRegistrationSerializer,
     UserProfileSerializer
 )
-from .models import User
 
 
 class UserRegistrationView(generics.CreateAPIView):
     """
     View for user registration.
     """
-    queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
     permission_classes = [permissions.AllowAny]
 
