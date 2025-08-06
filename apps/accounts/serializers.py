@@ -40,8 +40,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         # Make only first_name and last_name writable
         # Other fields are read-only while mvp is in progress to handle username, email, and phone_number edge cases
         read_only_fields = ['id', 'username', 'email', 'phone_number', 'is_email_verified', 'created_at']
-    
-
 
 
 class UserLoginSerializer(serializers.Serializer):
