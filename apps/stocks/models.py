@@ -9,8 +9,7 @@ class Stock(models.Model):
 
     symbol = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=100)
-    sector = models.CharField(max_length=50, blank=True, null=True)
-    industry = models.CharField(max_length=100, blank=True, null=True)
+    type = models.CharField(max_length=50, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
