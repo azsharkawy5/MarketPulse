@@ -136,6 +136,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Stock API Configuration
 STOCK_API_KEY = config("STOCK_API_KEY", default="")
 STOCK_API_BASE_URL = config("STOCK_API_BASE_URL", default="https://api.twelvedata.com")
+STOCK_API_ENDPOINT = config("STOCK_API_ENDPOINT", default="time_series")
+STOCK_API_INTERVAL = config("STOCK_API_INTERVAL", default="1min")
+STOCK_API_FORMAT = config("STOCK_API_FORMAT", default="JSON")
+STOCK_API_SIZE = config("STOCK_API_SIZE", default="1")
 
 
 SIMPLE_JWT = {
