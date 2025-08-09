@@ -168,6 +168,14 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = TIME_ZONE
 
+# Celery Beat Schedule
+CELERY_BEAT_SCHEDULE = {
+    "fetch_stock_data_batch": {
+        "task": "apps.stocks.tasks.fetch_stock_data_batch",
+        "schedule": 60.0,
+    },
+}
+
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
