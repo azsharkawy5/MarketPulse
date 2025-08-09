@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # Local apps
     "apps.accounts",
     "apps.stocks",
+    "apps.alerts",
 ]
 
 MIDDLEWARE = [
