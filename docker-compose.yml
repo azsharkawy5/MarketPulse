@@ -1,0 +1,99 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             gunicorn MarketPulse.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+    environment:
+      SECRET_KEY: "dev-insecure-secret-key"
+      DEBUG: "0"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,web"
+      DB_NAME: "marketpulse"
+      DB_USER: "marketpulse"
+      DB_PASSWORD: "marketpulse"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      REDIS_URL: "redis://redis:6379/0"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - staticfiles:/app/staticfiles
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             celery -A MarketPulse worker -l info"
+    environment:
+      SECRET_KEY: "dev-insecure-secret-key"
+      DEBUG: "0"
+      ALLOWED_HOSTS: "web"
+      DB_NAME: "marketpulse"
+      DB_USER: "marketpulse"
+      DB_PASSWORD: "marketpulse"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      REDIS_URL: "redis://redis:6379/0"
+    depends_on:
+      - db
+      - redis
+
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             celery -A MarketPulse beat -l info --schedule /beat/celerybeat-schedule"
+    environment:
+      SECRET_KEY: "dev-insecure-secret-key"
+      DEBUG: "0"
+      ALLOWED_HOSTS: "web"
+      DB_NAME: "marketpulse"
+      DB_USER: "marketpulse"
+      DB_PASSWORD: "marketpulse"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      REDIS_URL: "redis://redis:6379/0"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - beat_data:/beat
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    volumes:
+      - redis_data:/data
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: marketpulse
+      POSTGRES_USER: marketpulse
+      POSTGRES_PASSWORD: marketpulse
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  redis_data:
+  beat_data:
+  staticfiles:
+
+
