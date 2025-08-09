@@ -19,13 +19,9 @@ def fetch_single_stock_data(symbol):
         return
 
     try:
-        url = f"{settings.STOCK_API_BASE_URL}"
-        params = {
-            "symbol": symbol,
-            "apikey": settings.STOCK_API_KEY,
-        }
+        url = f"{settings.STOCK_API_BASE_URL}{settings.STOCK_API_ENDPOINT}?apikey={settings.STOCK_API_KEY}&symbol={symbol}&interval={settings.STOCK_API_INTERVAL}&format={settings.STOCK_API_FORMAT}&outputsize={settings.STOCK_API_SIZE}&type={settings.STOCK_TYPE}"
 
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
 
         data = response.json()
@@ -40,29 +36,33 @@ def fetch_single_stock_data(symbol):
         stock, created = Stock.objects.get_or_create(
             symbol=symbol.upper(),
             defaults={
-                "name": data.get("name", symbol),
-                "sector": data.get("sector", ""),
-                "industry": data.get("industry", ""),
+                "symbol": data.get("meta", {}).get("symbol", symbol),
+                "name": data.get("meta", {}).get("name", symbol),
+                "type": data.get("meta", {}).get("type", "N/A"),
             },
         )
 
         # Update stock info if not newly created
         if not created:
-            stock.name = data.get("name", stock.name)
-            stock.sector = data.get("sector", stock.sector)
-            stock.industry = data.get("industry", stock.industry)
+            stock.symbol = data.get("meta", {}).get("symbol", stock.symbol)
+            stock.name = data.get("meta", {}).get("name", stock.name)
+            stock.type = data.get("meta", {}).get("type", stock.type)
             stock.save()
 
         # Create price record
         price_data = {
             "stock": stock,
-            "price": Decimal(str(data.get("close", 0))),
-            "volume": int(data.get("volume", 0)),
-            "high": Decimal(str(data.get("high", 0))),
-            "low": Decimal(str(data.get("low", 0))),
-            "open_price": Decimal(str(data.get("open", 0))),
-            "close_price": Decimal(str(data.get("close", 0))),
-            "timestamp": timezone.now(),
+            "price": Decimal(str(data.get("values", [{}])[0].get("close", 0))),
+            "volume": int(data.get("values", [{}])[0].get("volume", 0)),
+            "high": Decimal(str(data.get("values", [{}])[0].get("high", 0))),
+            "low": Decimal(str(data.get("values", [{}])[0].get("low", 0))),
+            "open_price": Decimal(str(data.get("values", [{}])[0].get("open", 0))),
+            "close_price": Decimal(str(data.get("values", [{}])[0].get("close", 0))),
+            "timestamp": timezone.datetime.strptime(
+                data.get("values", [{}])[0].get("datetime", ""),
+                "%Y-%m-%d %H:%M:%S",
+            ),
+            "created_at": timezone.now(),
         }
 
         # Check if we already have a price record for this timestamp
