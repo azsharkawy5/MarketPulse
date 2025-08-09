@@ -25,6 +25,7 @@ Stock alerts and market data API built with Django, Django REST Framework, Celer
 - [Data Seeding](#data-seeding)
 - [Celery and Scheduled Jobs](#celery-and-scheduled-jobs)
 - [API Overview](#api-overview)
+- [Postman Collection](#postman-collection)
 - [Health Check](#health-check)
 - [Logging](#logging)
 - [Testing](#testing)
@@ -198,6 +199,32 @@ Health
 
 Pagination & Rendering
 - Page size 20 (DRF page-number). JSON renderer only.
+
+---
+
+### Postman Collection
+Use the bundled collection to explore endpoints quickly.
+
+1) Import the collection
+- Open Postman → Import → Select `docs/MarketPulse API.postman_collection.json`.
+
+2) Create an environment (recommended)
+- Create a Postman environment (top-right) with variables:
+  - `baseUrl`: `http://localhost:8000` (Docker or local run)
+  - `accessToken`: leave empty initially
+
+3) Get tokens
+- Send `POST {{baseUrl}}/api/v1/auth/register/` or `POST {{baseUrl}}/api/v1/auth/login/` with email/password.
+- Copy the `access` token from the response to the `accessToken` environment variable.
+
+4) Authorize requests
+- For protected requests, set header:
+  - `Authorization: Bearer {{accessToken}}`
+
+5) Refresh token (optional)
+- Use `POST {{baseUrl}}/api/v1/token/refresh/` with the `refresh` token to obtain a new access token.
+
+Tip: You can also use Postman’s pre-request scripts to auto-inject the `Authorization` header using `accessToken`.
 
 ---
 
