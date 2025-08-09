@@ -64,12 +64,32 @@ TEMPLATES = [
 WSGI_APPLICATION = "MarketPulse.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+# Database Configuration
+# Use DATABASE_URL from .env or fallback to default SQLite
+DB_NAME = config("DB_NAME", default=None)
+DB_USER = config("DB_USER", default=None)
+DB_PASSWORD = config("DB_PASSWORD", default=None)
+DB_HOST = config("DB_HOST", default=None)
+DB_PORT = config("DB_PORT", default="5432")
+
+if all([DB_NAME, DB_USER, DB_PASSWORD, DB_HOST]):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASSWORD,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
