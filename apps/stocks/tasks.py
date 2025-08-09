@@ -86,3 +86,44 @@ def fetch_single_stock_data(symbol):
         logger.error(f"Request error fetching data for {symbol}: {e}")
     except Exception as e:
         logger.error(f"Error fetching data for {symbol}: {e}")
+
+
+@shared_task
+def fetch_stock_data_batch():
+    """
+    Fetch data for a batch of popular stocks.
+    """
+    # Predefined list of popular stocks for mvp
+    # TODO In a real application, this could be dynamic or fetched from a database or config
+    popular_stocks = [
+        "AAPL",
+        "GOOGL",
+        "MSFT",
+        "AMZN",
+        "TSLA",
+        "META",
+        "NVDA",
+        "NFLX",
+        "AMD",
+        "INTC",
+    ]
+
+    for symbol in popular_stocks:
+        try:
+            fetch_single_stock_data.delay(symbol)
+        except Exception as e:
+            logger.error(f"Error scheduling fetch for {symbol}: {e}")
+
+
+@shared_task
+def cleanup_old_price_data():
+    """
+    Clean up old price data to prevent database bloat.
+    Keep only last 30 days of data.
+    """
+    from datetime import timedelta
+
+    cutoff_date = timezone.now() - timedelta(days=30)
+    deleted_count = StockPrice.objects.filter(timestamp__lt=cutoff_date).delete()[0]
+
+    logger.info(f"Cleaned up {deleted_count} old price records")
