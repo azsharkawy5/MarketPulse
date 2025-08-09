@@ -21,6 +21,7 @@ class Alert(models.Model):
     #  Method may be extended in the future to support more notification methods
     NOTIFICATION_METHODS = [
         ("email", "Email"),
+        ("console", "Console Notification"),
     ]
 
     user = models.ForeignKey(
