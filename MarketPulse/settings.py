@@ -140,6 +140,7 @@ STOCK_API_ENDPOINT = config("STOCK_API_ENDPOINT", default="time_series")
 STOCK_API_INTERVAL = config("STOCK_API_INTERVAL", default="1min")
 STOCK_API_FORMAT = config("STOCK_API_FORMAT", default="JSON")
 STOCK_API_SIZE = config("STOCK_API_SIZE", default="1")
+STOCK_TYPE = config("STOCK_TYPE", default="stock")
 
 
 SIMPLE_JWT = {
