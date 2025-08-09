@@ -1,0 +1,1239 @@
+{
+	"info": {
+		"_postman_id": "5fed257b-7337-4a9f-9809-65b2ef382270",
+		"name": "Stock Alert System API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27060092",
+		"_collection_link": "https://team66-8525.postman.co/workspace/Z.-Workspace~3b793593-ac03-41b0-88cd-8c1ceccbd654/collection/27060092-5fed257b-7337-4a9f-9809-65b2ef382270?action=share&source=collection_link&creator=27060092"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('refresh_token',response.tokens.refresh);",
+									"    pm.environment.set('access_token',response.tokens.access);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"ad1d111zsh\",\n  \"email\": \"az1sha1rddk11awy5@gmail.com\",\n  \"first_name\":\"Ahmad\",\n  \"last_name\":\"Zakaria\",\n  \"phone_number\":\"+201092725265\",\n  \"password\": \"123456@azsh\",\n  \"password_confirm\":\"123456@azsh\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"azsh\",\n  \"email\": \"azsharkawy5@gmail.com\",\n  \"first_name\":\"Ahmad\",\n  \"last_name\":\"Zakaria\",\n  \"phone_number\":\"+201092725265\",\n  \"password\": \"123456@azsh\",\n  \"password_confirm\":\"123456@azsh\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/auth/register/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 16:16:06 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "750"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"user\": {\n        \"id\": 1,\n        \"username\": \"azsh\",\n        \"email\": \"azsharkawy5@gmail.com\",\n        \"first_name\": \"Ahmad\",\n        \"last_name\": \"Zakaria\",\n        \"phone_number\": \"+201092725265\",\n        \"is_email_verified\": false,\n        \"created_at\": \"2025-08-06T16:16:06.177761Z\"\n    },\n    \"tokens\": {\n        \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTEwMTc2NiwiaWF0IjoxNzU0NDk2OTY2LCJqdGkiOiI3ZTkxNGNhNjFjZjk0NDMxYTQ5NGVlYTNjZDNhZWVhMyIsInVzZXJfaWQiOiIxIn0.35kBa54BbW0fGMhFU-P3gMX5mVxVVRpevp7YsYVJTvI\",\n        \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTAwNTY2LCJpYXQiOjE3NTQ0OTY5NjYsImp0aSI6IjQxZjQxOWIwMjQ3NTQwNmJiODk1NzMxMGUyZjRjYTUxIiwidXNlcl9pZCI6IjEifQ.UhpfUIpyTK47chEf_QcanLYLmKr_kfFZ0ppAf_z0FG8\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('refresh_token',response.tokens.refresh);",
+									"    pm.environment.set('access_token',response.tokens.access);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"azsharkawy5@gmail.com\",\n  \"password\": \"123456@azsh\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/login/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"azsharkawy5@gmail.com\",\n  \"password\": \"123456@azsh\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/auth/login/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 16:19:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "738"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"user\": {\n        \"id\": 1,\n        \"username\": \"azsh\",\n        \"email\": \"azsharkawy5@gmail.com\",\n        \"first_name\": \"Ahmad\",\n        \"last_name\": \"Zakaria\",\n        \"phone_number\": \"+201092725265\",\n        \"is_email_verified\": false,\n        \"created_at\": \"2025-08-06T16:16:06.177761Z\"\n    },\n    \"tokens\": {\n        \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTEwMTk2NSwiaWF0IjoxNzU0NDk3MTY1LCJqdGkiOiI1Y2MwZWVmYjFiZDU0Y2Y2YWM0MTM5OGZmOTI5OTE2NSIsInVzZXJfaWQiOiIxIn0.e_sRghiBbAtcv6g9M8AXNtkSQZIx1GTksnlDlj0Ia4U\",\n        \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTAwNzY1LCJpYXQiOjE3NTQ0OTcxNjYsImp0aSI6IjEwZTE1NzZmOGIyYTRmYWRiNDc1OTAwMGQwNmQyYmQ0IiwidXNlcl9pZCI6IjEifQ._QfaLxLZMCD3OW7Tkm6XmNx2FRTtApkHDx19U0Hyfd8\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Token Refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTEyNzgxOSwiaWF0IjoxNzU0NTIzMDE5LCJqdGkiOiI4N2Y1ZDVhOGQ0NzQ0OGI2ODYwMDQ1OWE2NWJmNTM5NyIsInVzZXJfaWQiOiIxIn0.9TRKGtdBvX4lfHOmV9doq7KQZrCCkWazEBvSXhIsQo8\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/token/refresh/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Token Refresh",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTEyNzE3MSwiaWF0IjoxNzU0NTIyMzcxLCJqdGkiOiIyOTI5YWJhNzY3ZmM0NjBjYmFjMDc2ZjJhNDhmNGEwOSIsInVzZXJfaWQiOiIxIn0.RAk5U-_KzE8rJmywxapKUOFji7sHw1ASVzMWYxQOylY\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/token/refresh/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"token",
+										"refresh",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 23:19:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "489"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTI1OTc5LCJpYXQiOjE3NTQ1MjIzNzksImp0aSI6ImE3NTM2NTIxMzM0NjRhYmY4NDY4MjM2MmM3MDYzMzFjIiwidXNlcl9pZCI6IjEifQ.38-m7WhzwD89Qb1Isrtmg6z7liFdFluQspWK66cQDRo\",\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTEyNzE3OSwiaWF0IjoxNzU0NTIyMzc5LCJqdGkiOiJkMmZjMWJkZjI3ZGU0ZTE3OTE4YmQ3MzExODJlZDE5MiIsInVzZXJfaWQiOiIxIn0.NZqtTyANjnAeOYIYm8diWAUzBuugFAywc_Wc3c6fssM\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTI1OTc5LCJpYXQiOjE3NTQ1MjIzNzksImp0aSI6ImE3NTM2NTIxMzM0NjRhYmY4NDY4MjM2MmM3MDYzMzFjIiwidXNlcl9pZCI6IjEifQ.38-m7WhzwD89Qb1Isrtmg6z7liFdFluQspWK66cQDRo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/logout/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU0NTI1OTc5LCJpYXQiOjE3NTQ1MjIzNzksImp0aSI6ImE3NTM2NTIxMzM0NjRhYmY4NDY4MjM2MmM3MDYzMzFjIiwidXNlcl9pZCI6IjEifQ.38-m7WhzwD89Qb1Isrtmg6z7liFdFluQspWK66cQDRo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/auth/logout/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 23:20:08 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logout successful\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/profile/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 17:24:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "201"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"azsh\",\n    \"email\": \"azsharkawy5@gmail.com\",\n    \"first_name\": \"Ahmad\",\n    \"last_name\": \"Zakaria\",\n    \"phone_number\": \"+201092725265\",\n    \"is_email_verified\": false,\n    \"created_at\": \"2025-08-06T17:23:16.436140Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Zakaria\",\n  \"last_name\": \"Ahmad\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Zakaria\",\n  \"last_name\": \"Ahmad\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/profile/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 06 Aug 2025 17:22:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "201"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"azsh\",\n    \"email\": \"azsharkawy5@gmail.com\",\n    \"first_name\": \"Zakaria\",\n    \"last_name\": \"Ahmad\",\n    \"phone_number\": \"+201092725265\",\n    \"is_email_verified\": false,\n    \"created_at\": \"2025-08-06T16:16:06.177761Z\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Stocks",
+			"item": [
+				{
+					"name": "List Stocks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/stocks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Stocks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/stocks/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stocks",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Aug 2025 20:12:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1764"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 10,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"symbol\": \"AAPL\",\n            \"name\": \"Apple Inc.\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Consumer Electronics\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 2,\n            \"symbol\": \"GOOGL\",\n            \"name\": \"Alphabet Inc.\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Internet Content & Information\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 3,\n            \"symbol\": \"MSFT\",\n            \"name\": \"Microsoft Corporation\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Software - Infrastructure\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 4,\n            \"symbol\": \"AMZN\",\n            \"name\": \"Amazon.com Inc.\",\n            \"sector\": \"Consumer Cyclical\",\n            \"industry\": \"Internet Retail\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 5,\n            \"symbol\": \"TSLA\",\n            \"name\": \"Tesla Inc.\",\n            \"sector\": \"Consumer Cyclical\",\n            \"industry\": \"Auto Manufacturers\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 6,\n            \"symbol\": \"META\",\n            \"name\": \"Meta Platforms Inc.\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Internet Content & Information\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 7,\n            \"symbol\": \"NVDA\",\n            \"name\": \"NVIDIA Corporation\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Semiconductors\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 8,\n            \"symbol\": \"NFLX\",\n            \"name\": \"Netflix Inc.\",\n            \"sector\": \"Communication Services\",\n            \"industry\": \"Entertainment\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 9,\n            \"symbol\": \"AMD\",\n            \"name\": \"Advanced Micro Devices Inc.\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Semiconductors\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        },\n        {\n            \"id\": 10,\n            \"symbol\": \"INTC\",\n            \"name\": \"Intel Corporation\",\n            \"sector\": \"Technology\",\n            \"industry\": \"Semiconductors\",\n            \"latest_price\": null,\n            \"price_change\": 0,\n            \"price_change_percent\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Stock Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/stocks/amd/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"amd",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Stock Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/stocks/AMD/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stocks",
+										"AMD",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Aug 2025 20:20:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "172"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 9,\n    \"symbol\": \"AMD\",\n    \"name\": \"Advanced Micro Devices Inc.\",\n    \"sector\": \"Technology\",\n    \"industry\": \"Semiconductors\",\n    \"latest_price\": null,\n    \"price_change\": 0,\n    \"price_change_percent\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Stock Price History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/stocks/AMD/prices/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"AMD",
+								"prices",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Watchlist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/watchlist/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"watchlist",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Watchlist",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/watchlist/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"watchlist",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Aug 2025 23:26:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "539"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 2,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 2,\n            \"stock\": 1,\n            \"stock_details\": {\n                \"id\": 1,\n                \"symbol\": \"AAPL\",\n                \"name\": \"Apple Inc.\",\n                \"sector\": \"Technology\",\n                \"industry\": \"Consumer Electronics\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-08T19:39:41.967765Z\"\n            },\n            \"added_at\": \"2025-08-08T23:23:41.229488Z\"\n        },\n        {\n            \"id\": 3,\n            \"stock\": 2,\n            \"stock_details\": {\n                \"id\": 2,\n                \"symbol\": \"GOOGL\",\n                \"name\": \"Alphabet Inc.\",\n                \"sector\": \"Technology\",\n                \"industry\": \"Internet Content & Information\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-08T19:39:41.968393Z\"\n            },\n            \"added_at\": \"2025-08-08T23:23:46.437701Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add to Watchlist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stock\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/watchlist/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"watchlist",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add to Watchlist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"stock\": 2\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/watchlist/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"watchlist",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Aug 2025 23:23:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "250"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"stock\": 2,\n    \"stock_details\": {\n        \"id\": 2,\n        \"symbol\": \"GOOGL\",\n        \"name\": \"Alphabet Inc.\",\n        \"sector\": \"Technology\",\n        \"industry\": \"Internet Content & Information\",\n        \"is_active\": true,\n        \"created_at\": \"2025-08-08T19:39:41.968393Z\"\n    },\n    \"added_at\": \"2025-08-08T23:23:46.437701Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove from Watchlist",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/watchlist/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"watchlist",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Remove from Watchlist",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/watchlist/1/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"watchlist",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 08 Aug 2025 23:25:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Allow",
+									"value": "DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	]
+}
