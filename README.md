@@ -210,21 +210,18 @@ Use the bundled collection to explore endpoints quickly.
 
 2) Create an environment (recommended)
 - Create a Postman environment (top-right) with variables:
-  - `baseUrl`: `http://localhost:8000` (Docker or local run)
-  - `accessToken`: leave empty initially
+  - `base_url`: `http://localhost:8000` (Docker or local run)
 
 3) Get tokens
-- Send `POST {{baseUrl}}/api/v1/auth/register/` or `POST {{baseUrl}}/api/v1/auth/login/` with email/password.
-- Copy the `access` token from the response to the `accessToken` environment variable.
+- Send `POST {{base_url}}/api/v1/auth/register/` or `POST {{base_url}}/api/v1/auth/login/` with email/password.
+- Automatically sets `access_token` and `refresh_token` in environment variables using post-request scripts.
 
 4) Authorize requests
 - For protected requests, set header:
-  - `Authorization: Bearer {{accessToken}}`
+  - `Authorization: Bearer {{access_token}}`
 
 5) Refresh token (optional)
-- Use `POST {{baseUrl}}/api/v1/token/refresh/` with the `refresh` token to obtain a new access token.
-
-Tip: You can also use Postman’s pre-request scripts to auto-inject the `Authorization` header using `accessToken`.
+- Use `POST {{base_url}}/api/v1/token/refresh/` with the `refresh` token to obtain a new access token.
 
 ---
 
