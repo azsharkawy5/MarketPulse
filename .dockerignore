@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# VCS
+.git
+.gitignore
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Python envs
+.venv/
+venv/
+
+# Django/Artifacts
+db.sqlite3
+logs/
+staticfiles/
+
+# Pytest
+.pytest_cache/
+
+# OS files
+.DS_Store
+
+# Celery beat local files
+celerybeat-schedule*
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+
+
