@@ -241,16 +241,10 @@ Run test suite with pytest:
 ```bash
 poetry run pytest -q
 ```
-or Django test runner:
-```bash
-poetry run python manage.py test
-```
-
 ---
 
 ### Docs
 - Postman collection: `docs/MarketPulse API.postman_collection.json`
-- JWT deep dive and best practices: `JWT_Authentication_Deep_Dive.md`
 - Database schema image: `database-schema.png`
 
 ---
