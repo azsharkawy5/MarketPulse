@@ -5,7 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 from celery import shared_task
 from .models import Stock, StockPrice
-
+from apps.alerts.tasks import process_alerts
 logger = logging.getLogger(__name__)
 
 
@@ -113,6 +113,7 @@ def fetch_stock_data_batch():
             fetch_single_stock_data.delay(symbol)
         except Exception as e:
             logger.error(f"Error scheduling fetch for {symbol}: {e}")
+    process_alerts.delay()
 
 
 @shared_task
