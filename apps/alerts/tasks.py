@@ -160,18 +160,31 @@ def send_alert_notification(trigger_id):
     Send notification for an alert trigger.
     """
     try:
-        trigger = AlertTrigger.objects.get(id=trigger_id)
-        alert = trigger.alert
-
+        # Use select_for_update to lock the row during this transaction
+        from django.db import transaction
+        
+        with transaction.atomic():
+            # Lock the row to prevent concurrent access
+            trigger = AlertTrigger.objects.select_for_update().get(id=trigger_id)
+            alert = trigger.alert
+            
+            # Check if notification has already been sent
+            if trigger.notification_sent:
+                logger.info(f"Notification for trigger {trigger_id} already sent, skipping")
+                return
+                
+            # Mark notification as being processed immediately to prevent duplicate processing
+            trigger.notification_sent = True
+            trigger.notification_sent_at = timezone.now()
+            trigger.save()
+        
+        # Now that we've marked it as sent, process the notification
         if alert.notification_method == "email":
-            send_email_notification.delay(trigger_id)
+            # Call directly instead of using delay to ensure sequential processing
+            send_email_notification(trigger_id)
         elif alert.notification_method == "console":
-            send_console_notification.delay(trigger_id)
-
-        # Mark notification as sent
-        trigger.notification_sent = True
-        trigger.notification_sent_at = timezone.now()
-        trigger.save()
+            # Call directly instead of using delay to ensure sequential processing
+            send_console_notification(trigger_id)
 
     except AlertTrigger.DoesNotExist:
         logger.warning(f"Alert trigger {trigger_id} not found")
@@ -209,7 +222,6 @@ def send_email_notification(trigger_id):
         Your stock alert has been triggered!
         
         Stock: {alert.stock.symbol} ({alert.stock.name})
-        Alert: {alert.description}
         Current Price: ${trigger.triggered_price}
         Triggered At: {trigger.triggered_at}
         
@@ -251,7 +263,6 @@ def send_console_notification(trigger_id):
         ===== STOCK ALERT TRIGGERED =====
         User: {user.email}
         Stock: {alert.stock.symbol} ({alert.stock.name})
-        Alert: {alert.description}
         Current Price: ${trigger.triggered_price}
         Triggered At: {trigger.triggered_at}
         =================================
