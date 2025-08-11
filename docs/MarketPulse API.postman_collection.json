@@ -8,6 +8,93 @@
 	},
 	"item": [
 		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Health Check",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/health/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"health",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 09:44:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"healthy\",\n    \"message\": \"MarketPulse is running\",\n    \"database\": \"ok\",\n    \"redis\": \"ok\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Accounts",
 			"item": [
 				{
@@ -38,7 +125,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"ad1d111zsh\",\n  \"email\": \"az1sha1rddk11awy5@gmail.com\",\n  \"first_name\":\"Ahmad\",\n  \"last_name\":\"Zakaria\",\n  \"phone_number\":\"+201092725265\",\n  \"password\": \"123456@azsh\",\n  \"password_confirm\":\"123456@azsh\"\n}"
+							"raw": "{\n  \"username\": \"azsh\",\n  \"email\": \"azsharkawy5@gmail.com\",\n  \"first_name\":\"Ahmad\",\n  \"last_name\":\"Zakaria\",\n  \"phone_number\":\"+201092725265\",\n  \"password\": \"123456@azsh\",\n  \"password_confirm\":\"123456@azsh\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/v1/auth/register/",
@@ -912,7 +999,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/stocks/AMD/prices/",
+							"raw": "{{base_url}}/api/v1/stocks/NFLX/prices/",
 							"host": [
 								"{{base_url}}"
 							],
@@ -920,13 +1007,87 @@
 								"api",
 								"v1",
 								"stocks",
-								"AMD",
+								"NFLX",
 								"prices",
 								""
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock Price History",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/stocks/NFLX/prices/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stocks",
+										"NFLX",
+										"prices",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 12:37:30 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "305"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 11,\n            \"stock\": 11,\n            \"stock_symbol\": \"NFLX\",\n            \"stock_name\": \"NFLX\",\n            \"price\": \"1211.81\",\n            \"volume\": 55979,\n            \"high\": \"1211.92\",\n            \"low\": \"1211.05\",\n            \"open_price\": \"1211.76\",\n            \"close_price\": \"1211.81\",\n            \"timestamp\": \"2025-08-08T15:59:00Z\",\n            \"created_at\": \"2025-08-09T12:37:10.992306Z\"\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Watchlist",
@@ -977,7 +1138,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "Date",
@@ -1041,7 +1202,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"stock\": 2\n}"
+							"raw": "{\n  \"stock\": 21\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/v1/watchlist/",
@@ -1090,7 +1251,7 @@
 							},
 							"status": "Created",
 							"code": 201,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "Date",
@@ -1189,7 +1350,7 @@
 							},
 							"status": "No Content",
 							"code": 204,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": null,
 							"header": [
 								{
 									"key": "Date",
@@ -1229,7 +1390,1031 @@
 								}
 							],
 							"cookie": [],
-							"body": ""
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Alerts",
+			"item": [
+				{
+					"name": "List Alerts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Alerts",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:44:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1302"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 3,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 1,\n            \"stock\": 1,\n            \"stock_details\": {\n                \"id\": 1,\n                \"symbol\": \"AAPL\",\n                \"name\": \"Apple Inc.\",\n                \"sector\": \"Technology\",\n                \"industry\": \"Consumer Electronics\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-09T08:39:41.040767Z\"\n            },\n            \"alert_type\": \"threshold\",\n            \"condition\": \"above\",\n            \"threshold_price\": \"200.00\",\n            \"duration_hours\": 0,\n            \"notification_method\": \"email\",\n            \"is_active\": true,\n            \"trigger_count\": 0,\n            \"last_triggered\": null,\n            \"created_at\": \"2025-08-09T08:42:28.358182Z\"\n        },\n        {\n            \"id\": 2,\n            \"stock\": 1,\n            \"stock_details\": {\n                \"id\": 1,\n                \"symbol\": \"AAPL\",\n                \"name\": \"Apple Inc.\",\n                \"sector\": \"Technology\",\n                \"industry\": \"Consumer Electronics\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-09T08:39:41.040767Z\"\n            },\n            \"alert_type\": \"threshold\",\n            \"condition\": \"above\",\n            \"threshold_price\": \"200.00\",\n            \"duration_hours\": 0,\n            \"notification_method\": \"email\",\n            \"is_active\": true,\n            \"trigger_count\": 0,\n            \"last_triggered\": null,\n            \"created_at\": \"2025-08-09T08:43:11.107569Z\"\n        },\n        {\n            \"id\": 3,\n            \"stock\": 1,\n            \"stock_details\": {\n                \"id\": 1,\n                \"symbol\": \"AAPL\",\n                \"name\": \"Apple Inc.\",\n                \"sector\": \"Technology\",\n                \"industry\": \"Consumer Electronics\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-09T08:39:41.040767Z\"\n            },\n            \"alert_type\": \"threshold\",\n            \"condition\": \"above\",\n            \"threshold_price\": \"200.00\",\n            \"duration_hours\": 0,\n            \"notification_method\": \"email\",\n            \"is_active\": true,\n            \"trigger_count\": 0,\n            \"last_triggered\": null,\n            \"created_at\": \"2025-08-09T08:43:27.680201Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Alert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 21,\n    \"alert_type\": \"threshold\",\n    \"condition\": \"above\",\n    \"threshold_price\": 300\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Alert Threshold",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"stock\": 1,\n  \"alert_type\": \"threshold\",\n  \"condition\": \"above\",\n  \"threshold_price\": 200\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:43:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "132"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"stock\": 1,\n    \"alert_type\": \"threshold\",\n    \"condition\": \"above\",\n    \"threshold_price\": \"200.00\",\n    \"duration_hours\": 0,\n    \"notification_method\": \"email\"\n}"
+						},
+						{
+							"name": "Create Alert Duration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"stock\": 1,\n    \"alert_type\": \"duration\",\n    \"condition\": \"above\",\n    \"duration_hours\": 2,\n    \"threshold_price\": 200\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:47:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "131"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"stock\": 1,\n    \"alert_type\": \"duration\",\n    \"condition\": \"above\",\n    \"threshold_price\": \"200.00\",\n    \"duration_hours\": 2,\n    \"notification_method\": \"email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Alert Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"2",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alert Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/2/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										"2",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:49:04 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "428"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"user\": 2,\n    \"stock\": 1,\n    \"stock_details\": {\n        \"id\": 1,\n        \"symbol\": \"AAPL\",\n        \"name\": \"Apple Inc.\",\n        \"sector\": \"Technology\",\n        \"industry\": \"Consumer Electronics\",\n        \"is_active\": true,\n        \"created_at\": \"2025-08-09T08:39:41.040767Z\"\n    },\n    \"alert_type\": \"threshold\",\n    \"condition\": \"above\",\n    \"threshold_price\": \"200.00\",\n    \"duration_hours\": 0,\n    \"notification_method\": \"email\",\n    \"is_active\": true,\n    \"created_at\": \"2025-08-09T08:43:11.107569Z\",\n    \"updated_at\": \"2025-08-09T08:43:11.107595Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Alert",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 21,\n    \"alert_type\": \"threshold\",\n    \"condition\": \"above\",\n    \"duration_hours\": 2,\n    \"notification_method\": \"console\",\n    \"threshold_price\": 200\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/6/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"6",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Alert",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"stock\": 1,\n    \"alert_type\": \"duration\",\n    \"condition\": \"above\",\n    \"duration_hours\": 2,\n    \"threshold_price\": 200\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/1/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										"1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:50:13 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "427"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user\": 2,\n    \"stock\": 1,\n    \"stock_details\": {\n        \"id\": 1,\n        \"symbol\": \"AAPL\",\n        \"name\": \"Apple Inc.\",\n        \"sector\": \"Technology\",\n        \"industry\": \"Consumer Electronics\",\n        \"is_active\": true,\n        \"created_at\": \"2025-08-09T08:39:41.040767Z\"\n    },\n    \"alert_type\": \"duration\",\n    \"condition\": \"above\",\n    \"threshold_price\": \"200.00\",\n    \"duration_hours\": 2,\n    \"notification_method\": \"email\",\n    \"is_active\": true,\n    \"created_at\": \"2025-08-09T08:42:28.358182Z\",\n    \"updated_at\": \"2025-08-09T08:50:13.647093Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Alert",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"1",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Alert",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/4/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										"4",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:50:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Toggle Alert Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/2/toggle/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"2",
+								"toggle",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Toggle Alert Status",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/1/toggle/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										"1",
+										"toggle",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:51:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Alert deactivated successfully\",\n    \"is_active\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Alerts Checks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/checks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"checks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alert Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/alerts/statistics/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts",
+								"statistics",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Alert Statistics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/alerts/statistics/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"alerts",
+										"statistics",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 08:52:04 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, GET"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total_alerts\": 3,\n    \"active_alerts\": 2,\n    \"total_triggers\": 0,\n    \"recent_triggers\": 0,\n    \"alert_types\": {\n        \"threshold\": 2,\n        \"duration\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Triggers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/triggers/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"triggers",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Triggers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/triggers/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"triggers",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 11 Aug 2025 12:32:08 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "651"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 1,\n    \"next\": null,\n    \"previous\": null,\n    \"results\": [\n        {\n            \"id\": 16,\n            \"alert\": 6,\n            \"alert_details\": {\n                \"id\": 6,\n                \"user\": 2,\n                \"stock\": 21,\n                \"stock_details\": {\n                    \"id\": 21,\n                    \"symbol\": \"TSLA\",\n                    \"name\": \"TSLA\",\n                    \"type\": \"Common Stock\",\n                    \"is_active\": true,\n                    \"created_at\": \"2025-08-09T12:47:37.562185Z\"\n                },\n                \"alert_type\": \"threshold\",\n                \"condition\": \"above\",\n                \"threshold_price\": \"200.00\",\n                \"duration_hours\": 2,\n                \"notification_method\": \"console\",\n                \"is_active\": true,\n                \"created_at\": \"2025-08-10T07:08:50.742766Z\",\n                \"updated_at\": \"2025-08-10T07:24:17.648867Z\"\n            },\n            \"triggered_price\": \"329.68\",\n            \"triggered_at\": \"2025-08-10T08:07:51.990223Z\",\n            \"notification_sent\": true,\n            \"notification_sent_at\": \"2025-08-10T08:07:52.683126Z\",\n            \"error_message\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Trigger Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/triggers/16/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"triggers",
+								"16",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Trigger Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/triggers/16/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"triggers",
+										"16",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 11 Aug 2025 12:32:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.13.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "599"
+								},
+								{
+									"key": "Vary",
+									"value": "origin"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 16,\n    \"alert\": 6,\n    \"alert_details\": {\n        \"id\": 6,\n        \"user\": 2,\n        \"stock\": 21,\n        \"stock_details\": {\n            \"id\": 21,\n            \"symbol\": \"TSLA\",\n            \"name\": \"TSLA\",\n            \"type\": \"Common Stock\",\n            \"is_active\": true,\n            \"created_at\": \"2025-08-09T12:47:37.562185Z\"\n        },\n        \"alert_type\": \"threshold\",\n        \"condition\": \"above\",\n        \"threshold_price\": \"200.00\",\n        \"duration_hours\": 2,\n        \"notification_method\": \"console\",\n        \"is_active\": true,\n        \"created_at\": \"2025-08-10T07:08:50.742766Z\",\n        \"updated_at\": \"2025-08-10T07:24:17.648867Z\"\n    },\n    \"triggered_price\": \"329.68\",\n    \"triggered_at\": \"2025-08-10T08:07:51.990223Z\",\n    \"notification_sent\": true,\n    \"notification_sent_at\": \"2025-08-10T08:07:52.683126Z\",\n    \"error_message\": null\n}"
 						}
 					]
 				}
