@@ -259,6 +259,11 @@ poetry run pytest -q
 - Ensure email credentials are set if using email notifications.
 - For CORS, adjust `CORS_ALLOWED_ORIGINS` in settings for your frontend domain(s).
 
+### Fly.io Deployment
+MarketPulse has been deployed to Fly.io as a temporary deployment. The app is containerized using Docker and can be easily deployed to Fly.io's global infrastructure.
+
+**Note**: This is a temporary deployment for testing and demonstration purposes.
+
 ### AWS Free Tier Deployment
 MarketPulse can be deployed on AWS Free Tier services for cost-effective hosting. See the [complete AWS deployment guide](./aws-deployment-guide.md) for detailed instructions.
 
@@ -308,13 +313,8 @@ Here's how I deployed this app to AWS:
    cp env.example .env
    nano .env
    
-   # My simple .env setup:
-   # SECRET_KEY=make-up-a-random-string
-   # DEBUG=0
-   # ALLOWED_HOSTS=your-ec2-ip-address
-   # REDIS_URL=redis://redis:6379/0
-   # For a quick start, I just used SQLite by not setting DB_ vars
-   
+   # Edit .env to set SECRET_KEY, REDIS_URL, DB_* (or use SQLite fallback) 
+
    # Run the app
    docker-compose -f docker-compose.prod.yml up -d
    docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
