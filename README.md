@@ -31,6 +31,8 @@ Stock alerts and market data API built with Django, Django REST Framework, Celer
 - [Testing](#testing)
 - [Docs](#docs)
 - [Deployment Notes](#deployment-notes)
+- [AWS Free Tier Deployment](#aws-free-tier-deployment)
+  - [Quick Start AWS Deployment](#quick-start-aws-deployment)
 - [License](#license)
 
 ---
@@ -256,6 +258,73 @@ poetry run pytest -q
 - Configure reverse proxy (Nginx/Caddy) to forward to `web:8000` and serve staticfiles or use a CDN.
 - Ensure email credentials are set if using email notifications.
 - For CORS, adjust `CORS_ALLOWED_ORIGINS` in settings for your frontend domain(s).
+
+### AWS Free Tier Deployment
+MarketPulse can be deployed on AWS Free Tier services for cost-effective hosting. See the [complete AWS deployment guide](./aws-deployment-guide.md) for detailed instructions.
+
+#### Basic AWS Deployment Steps
+
+Here's how I deployed this app to AWS:
+
+1. **AWS Account Setup**
+   - Create account on aws.amazon.com
+   - Free tier worked fine for me!
+
+2. **EC2 Setup (The Server)**
+   ```bash
+   # After creating EC2 instance (t2.micro Amazon Linux 2023)
+   # Save the .pem file somewhere safe!
+   
+   # Connect to your server
+   chmod 400 your-key.pem
+   ssh -i your-key.pem ec2-user@your-server-address
+   ```
+
+3. **Docker Setup**
+   ```bash
+   # These commands install Docker
+   sudo yum update -y
+   sudo yum install -y docker
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   sudo usermod -a -G docker ec2-user
+   
+   # Get Docker Compose too
+   sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
+   
+   # Exit and reconnect
+   exit
+   ssh -i your-key.pem ec2-user@your-server-address
+   ```
+
+4. **App Deployment**
+   ```bash
+   # Get the code
+   git clone https://github.com/azsharkawy5/MarketPulse.git
+   cd MarketPulse
+   
+   # Setup environment
+   cp env.example .env
+   nano .env
+   
+   # My simple .env setup:
+   # SECRET_KEY=make-up-a-random-string
+   # DEBUG=0
+   # ALLOWED_HOSTS=your-ec2-ip-address
+   # REDIS_URL=redis://redis:6379/0
+   # For a quick start, I just used SQLite by not setting DB_ vars
+   
+   # Run the app
+   docker-compose -f docker-compose.prod.yml up -d
+   docker-compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+   docker-compose -f docker-compose.prod.yml exec web python manage.py seed_stocks
+   ```
+
+
+Note: I had some issues with security groups - remember to open ports 22 (SSH), 80 (HTTP) and 8000 in the AWS Console security group settings.
+
+Next time I'd use a proper PostgreSQL RDS instance instead of SQLite, Redis ElastiCache for Celery, and S3 for static files. But this quick setup works fine for testing and small projects.
 
 ---
 

@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             gunicorn MarketPulse.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - staticfiles:/app/staticfiles
+      - ./logs:/app/logs
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             celery -A MarketPulse worker -l info"
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./logs:/app/logs
+
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "until nc -z db 5432; do echo waiting for postgres; sleep 1; done &&
+             until nc -z redis 6379; do echo waiting for redis; sleep 1; done &&
+             celery -A MarketPulse beat -l info --schedule /beat/celerybeat-schedule"
+    env_file:
+      - .env
+    volumes:
+      - beat_data:/beat
+      - ./logs:/app/logs
+    restart: always
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-marketpulse}
+      POSTGRES_USER: ${DB_USER:-marketpulse}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-marketpulse}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
+  redis_data:
+  beat_data:
+  staticfiles:
