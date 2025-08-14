@@ -30,6 +30,12 @@ class StockPrice(models.Model):
     timestamp = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['stock', '-timestamp']),
+            models.Index(fields=['timestamp']),
+        ]
+
 
 class StockWatchlist(models.Model):
     """
