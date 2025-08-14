@@ -41,6 +41,12 @@ class Alert(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['user', 'is_active']),
+            models.Index(fields=['stock', 'is_active']),
+        ]
+
 
 class AlertTrigger(models.Model):
     """
@@ -53,6 +59,11 @@ class AlertTrigger(models.Model):
     notification_sent = models.BooleanField(default=False)
     notification_sent_at = models.DateTimeField(null=True, blank=True)
     error_message = models.TextField(blank=True, null=True)
+    class Meta:
+        indexes = [
+            models.Index(fields=['alert', '-triggered_at']),
+            models.Index(fields=['triggered_at']),
+        ]
 
 
 class AlertCheck(models.Model):
@@ -65,3 +76,9 @@ class AlertCheck(models.Model):
     condition_met = models.BooleanField()
     checked_at = models.DateTimeField(auto_now_add=True)
     duration_start = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['alert', '-checked_at']),
+            models.Index(fields=['checked_at']),
+        ]
