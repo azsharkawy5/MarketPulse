@@ -49,3 +49,6 @@ class StockWatchlist(models.Model):
         Stock, on_delete=models.CASCADE, related_name="watchlists"
     )
     added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['user', 'stock']
