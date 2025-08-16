@@ -8,8 +8,7 @@ authors = [
 license = {text = "MIT"}
 readme = "README.md"
 requires-python =  "^3.13" 
-[tool.poetry]
-package-mode = false
+
 dependencies = [
     "django (>=5.2.4,<6.0.0)",
     "djangorestframework (>=3.16.0,<4.0.0)",
@@ -30,3 +29,6 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
