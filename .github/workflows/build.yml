@@ -13,6 +13,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
+      - name: Use secret
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
