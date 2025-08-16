@@ -1,28 +1,28 @@
 name: build
-
 on:
   push:
     branches: [ init-github-actions ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.13'
-      - name: Use secret
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: ${{ secrets.DEBUG }}
-      - name: Install dependencies
+          python-version: '3.11'
+          
+      - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          poetry install
-      - name: Run tests
-        run: |
-          poetry run pytest -v
           
+      - name: Install dependencies
+        run: poetry install
+        
+      - name: Run tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+        run: poetry run pytest -v
